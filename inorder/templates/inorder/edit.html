@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block title %}修改入库单{% endblock %}
+{% block content %}
+    <div class="container" style="height: 600px">
+        <div class="col-md-4 col-md-offset-4">
+            <form class='form-inorder' action="{% url 'inorder:update' inorder_id %}" method="post">
+
+                {% if msg %}
+                    <div class="alert alert-warning">{{ msg }}</div>
+                {% endif %}
+
+                {% csrf_token %}
+
+                <h2 class="text-center">修改入库单</h2>
+                <div class="form-group">
+                    {{ inorder_form.id.label_tag }}
+                    {{ inorder_form.id }}
+                </div>
+                <div class="form-group">
+                    {{ inorder_form.code.label_tag }}
+                    {{ inorder_form.code }}
+                </div>
+                <div class="form-group">
+                    {{ inorder_form.customer.label_tag }}
+                    {{ inorder_form.customer }}
+                </div>
+                <div class="form-group">
+                    {{ inorder_form.user.label_tag }}
+                    {{ inorder_form.user }}
+                </div>
+                <div class="form-group">
+                    {{ inorder_form.create_time.label_tag }}
+                    {{ inorder_form.create_time }}
+                </div>
+
+                <button type="reset" class="btn btn-default pull-left">重置</button>
+                <button type="submit" class="btn btn-primary pull-right">保存</button>
+
+            </form>
+        </div>
+    </div> <!-- /container -->
+{% endblock %}

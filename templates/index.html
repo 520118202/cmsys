@@ -1,0 +1,11 @@
+{% extends 'base2.html' %}
+{% block title %}主页{% endblock %}
+{% block content %}
+    <div class="container text-center" style="height: 600px">
+        {% if request.session.is_login %}
+            <h1>你好,{{ request.session.user_name }}！欢迎回来！</h1>
+        {% else %}
+            <h1>你尚未登录，只能访问公开内容！</h1>
+        {% endif %}
+    </div>
+{% endblock %}

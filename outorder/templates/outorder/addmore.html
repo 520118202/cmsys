@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}添加出库单服装{% endblock %}
+{% block content %}
+    <div class="container" style="height: 600px">
+        <div class="col-md-4 col-md-offset-4">
+            <form class='form-outorderclothes' action="{% url 'outorder:addmore' outorder_id %}" method="post">
+
+                {% if msg %}
+                    <div class="alert alert-warning">{{ msg }}</div>
+                {% endif %}
+
+                {% csrf_token %}
+
+                <h2 class="text-center">添加出库单服装</h2>
+                <div class="form-group">
+                    {{ outorderclothes_form.clothes.label_tag }}
+                    {{ outorderclothes_form.clothes }}
+                </div>
+                <div class="form-group">
+                    {{ outorderclothes_form.amount.label_tag }}
+                    {{ outorderclothes_form.amount }}
+                </div>
+                <p id="checkResult"></p>
+
+                <button type="reset" class="btn btn-default pull-left">重置</button>
+                <button type="submit" class="btn btn-primary pull-right">添加</button>
+
+            </form>
+        </div>
+    </div> <!-- /container -->
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %}出库管理{% endblock %}
+{% block content %}
+    <div id="content" style="height: 600px">
+        <div id="search" class="text-center">
+            <form class="form-inline" action="{% url 'outorder:search' %} " method="post">
+                <div class="form-group ">
+                    <a class="btn btn-info" href="{% url 'outorder:add' %}">添加</a>
+                </div>
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" placeholder="输入ID查询">
+                </div>
+                <div class="form-group">
+                    <label for="code">出库单号</label>
+                    <input type="text" class="form-control" id="code" name="code" placeholder="输入出库单号查询">
+                </div>
+                <div class="form-group">
+                    <label for="customer_name">客户</label>
+                    <input type="text" class="form-control" id="customer_name" name="customer_name"
+                           placeholder="输入客户查询">
+                </div>
+                <div class="form-group">
+                    <label for="user_name">经手人</label>
+                    <input type="text" class="form-control" id="user_name" name="user_name" placeholder="输入经手人查询">
+                </div>
+                <button type="submit" class="btn btn-success">查询</button>
+            </form>
+        </div>
+        <br>
+        <div id="table" align="center">
+            {% if result %}
+                <table class="table table-striped table-bordered table-hover  table-condensed" style="width: 1100px">
+                <tr class="success">
+                    <td>ID</td>
+                    <td>出库单号</td>
+                    <td>客户</td>
+                    <td>经手人</td>
+                    <td>创建时间</td>
+                    <td>修改时间</td>
+                    <td>详情</td>
+                    <td>编辑</td>
+                    <td>修改</td>
+                </tr>
+                {% for foo in result %}
+                    <tr>
+                        <td>{{ foo.id }}</td>
+                        <td>{{ foo.code }}</td>
+                        <td>{{ foo.customer.name }}</td>
+                        <td>{{ foo.user.name }}</td>
+                        <td>{{ foo.create_time }}</td>
+                        <td>{{ foo.modify_time }}</td>
+                        <td><a class="btn  btn-warning btn-sm" href="{% url 'outorder:detail' foo.id %}">详情</a></td>
+                        <td><a class="btn btn-primary btn-sm" href="{% url 'outorder:update' foo.id %}">编辑</a></td>
+                        <td><a class="btn btn-danger btn-sm" href="{% url 'outorder:delete' foo.id %}">删除</a></td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <p>没有任何出库单</p>
+            {% endif %}
+            </table>
+        </div>
+        <!-- 分页开始 -->
+        <div class="text-center">
+            <ul class="pagination">
+                <li><a href="/outorder/?page=1" rel="external nofollow">首页</a></li>
+                {% if result.has_previous %}
+                    <li><a href="/outorder/?page={{ result.previous_page_number }}" rel="external nofollow">上一页</a></li>
+                {% endif %}
+                {% for num in result.paginator.page_range %}
+                    <li><a href="/outorder/?page={{ num }}" rel="external nofollow">{{ num }}</a></li>
+                {% endfor %}
+                {% if result.has_next %}
+                    <li><a href="/outorder/?page={{ result.next_page_number }}" rel="external nofollow">下一页</a></li>
+                {% endif %}
+                <li><a href="/outorder/?page={{ result.paginator.num_pages }}" rel="external nofollow">尾页</a></li>
+            </ul>
+        </div>
+        <!-- 分页结束 -->
+    </div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}修改出库单{% endblock %}
+{% block content %}
+    <div class="container" style="height: 600px">
+        <div class="col-md-4 col-md-offset-4">
+            <form class='form-outorder' action="{% url 'outorder:update' outorder_id %}" method="post">
+
+                {% if msg %}
+                    <div class="alert alert-warning">{{ msg }}</div>
+                {% endif %}
+
+                {% csrf_token %}
+
+                <h2 class="text-center">修改入库单</h2>
+                <div class="form-group">
+                    {{ outorder_form.id.label_tag }}
+                    {{ outorder_form.id }}
+                </div>
+                <div class="form-group">
+                    {{ outorder_form.code.label_tag }}
+                    {{ outorder_form.code }}
+                </div>
+                <div class="form-group">
+                    {{ outorder_form.customer.label_tag }}
+                    {{ outorder_form.customer }}
+                </div>
+                <div class="form-group">
+                    {{ outorder_form.user.label_tag }}
+                    {{ outorder_form.user }}
+                </div>
+                <div class="form-group">
+                    {{ outorder_form.create_time.label_tag }}
+                    {{ outorder_form.create_time }}
+                </div>
+
+                <button type="reset" class="btn btn-default pull-left">重置</button>
+                <button type="submit" class="btn btn-primary pull-right">保存</button>
+            </form>
+        </div>
+    </div> <!-- /container -->
+{% endblock %}

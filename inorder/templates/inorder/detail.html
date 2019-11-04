@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block title %}入库单详情{% endblock %}
+{% block content %}
+    <div align="center" style="height: 600px">
+        {% if msg %}
+            <p>{{ msg }}</p>
+        {% endif %}
+        {% if qs1 %}
+            <table class="table table-striped table-bordered table-hover  table-condensed" style="width: 800px">
+                <tr class="success">
+                    <td>ID</td>
+                    <td>入库单号</td>
+                    <td>客户</td>
+                    <td>经手人</td>
+                    <td>合计</td>
+                    <td>创建时间</td>
+                    <td>修改时间</td>
+                    <td>编辑</td>
+                    <td>修改</td>
+                </tr>
+                {% for foo in qs1 %}
+                    <tr>
+                        <td>{{ foo.id }}</td>
+                        <td>{{ foo.code }}</td>
+                        <td>{{ foo.customer.name }}</td>
+                        <td>{{ foo.user.name }}</td>
+                        <td>{{ sum }}</td>
+                        <td>{{ foo.create_time }}</td>
+                        <td>{{ foo.modify_time }}</td>
+                        <td><a class="btn btn-primary btn-sm" href="{% url 'inorder:update' foo.id %}">编辑</a></td>
+                        <td><a class="btn btn-danger btn-sm" href="{% url 'inorder:delete' foo.id %}">删除</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>没有任何入库单</p>
+        {% endif %}
+        {% if qs2 %}
+            <a class="btn btn-info btn-sm" href="{% url 'inorder:addmore' inorder_id %}">继续添加</a>
+            <br>
+            <br>
+            <table class="table table-striped table-bordered table-hover  table-condensed" style="width: 800px">
+                <tr class="success">
+                    <td>ID</td>
+                    <td>服装号</td>
+                    <td>服装名</td>
+                    <td>价格</td>
+                    <td>数量</td>
+                    <td>小计</td>
+                    <td>编辑</td>
+                    <td>删除</td>
+                </tr>
+                {% for foo in qs2 %}
+                    <tr>
+                        <td>{{ foo.id }}</td>
+                        <td>{{ foo.clothes.sn }}</td>
+                        <td>{{ foo.clothes.name }}</td>
+                        <td>{{ foo.clothes.price }}</td>
+                        <td>{{ foo.amount }}</td>
+                        <td>{% widthratio foo.clothes.price 1 foo.amount %}
+                        <td><a class="btn btn-primary btn-sm"
+                               href="{% url 'inorder:editmore' inorder_id=inorder_id inorderclothes_id=foo.id %}">编辑</a>
+                        </td>
+                        <td><a class="btn btn-danger btn-sm"
+                               href="{% url 'inorder:deletemore' inorder_id=inorder_id inorderclothes_id=foo.id %}">删除</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>没有任何服装信息</p>
+            <a class="btn btn-info btn-sm" href="{% url 'inorder:addmore' inorder_id %}">添加</a>
+        {% endif %}
+
+    </div>
+{% endblock %}
