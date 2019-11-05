@@ -59,19 +59,20 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-{% if messages %}
-    <div id="messages" class="text-center">
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} alert-dismissible fade in" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-                <strong>信息提示：</strong> {{ message }}.
-            </div>
-        {% endfor %}
-    </div>
-{% endif %}
+
 {% if request.session.is_login %}
+    {% if messages %}
+        <div id="messages" class="text-center">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <strong>信息提示：</strong> {{ message }}.
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
     {% block content %}{% endblock %}
 {% else %}
     <div class="container text-center" style="height: 600px">
@@ -88,27 +89,5 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.min.js' %}"></script>
 </body>
-<script>
-    $(function () {
-        $(".faq-tabbable").find("li").each(function () {
-            var a = $(this).find("a:first")[0];
-            if ($(a).attr("href") === location.pathname) {
-                $(this).addClass("active");
-            } else {
-                $(this).removeClass("active");
-            }
-        });
-        $("#id_clothes").change(function () {
-            var page = "/clothes/checkstock/";
-            var value = $(this).val();
-            $.ajax({
-                url: page + value,
-                success: function (result) {
-                    $("checkResult").val = result.amount;
-
-                }
-            })
-        });
-    })
-</script>
+<script src="{% static 'js/main.js' %}"></script>
 </html>

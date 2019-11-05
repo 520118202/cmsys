@@ -15,19 +15,23 @@
                 <div class="form-group">
                     {{ changepwd_form.password_now.label_tag }}
                     {{ changepwd_form.password_now }}
+                    {{ changepwd_form.password_now.errors }}
                 </div>
                 <div class="form-group">
                     {{ changepwd_form.password1.label_tag }}
                     {{ changepwd_form.password1 }}
+                    {{ changepwd_form.password1.errors }}
                 </div>
                 <div class="form-group">
                     {{ changepwd_form.password2.label_tag }}
                     {{ changepwd_form.password2 }}
+                    {{ changepwd_form.password2.errors }}
                 </div>
                 <div class="form-group">
-                    {{ changepwd_form.captcha.errors }}
                     {{ changepwd_form.captcha.label_tag }}
                     {{ changepwd_form.captcha }}
+                    {{ changepwd_form.captcha.errors }}
+
                 </div>
                 <button type="reset" class="btn btn-default pull-left">重置</button>
                 <button type="submit" class="btn btn-primary pull-right">保存</button>

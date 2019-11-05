@@ -14,18 +14,20 @@
                 <div class="form-group">
                     {{ login_form.username.label_tag }}
                     {{ login_form.username }}
+                    {{ login_form.username.errors }}
                 </div>
                 <div class="form-group">
                     {{ login_form.password.label_tag }}
                     {{ login_form.password }}
+                    {{ login_form.password.errors }}
                 </div>
                 <div class="form-group">
-                    {{ login_form.captcha.errors }}
                     {{ login_form.captcha.label_tag }}
                     {{ login_form.captcha }}
+                    {{ login_form.captcha.errors }}
                 </div>
                 <button type="reset" class="btn btn-default pull-left">重置</button>
-                <button type="submit" class="btn btn-primary pull-right">提交</button>
+                <button type="submit" class="btn btn-primary pull-right">登录</button>
             </form>
         </div>
     </div> <!-- /container -->

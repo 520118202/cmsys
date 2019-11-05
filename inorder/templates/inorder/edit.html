@@ -15,22 +15,27 @@
                 <div class="form-group">
                     {{ inorder_form.id.label_tag }}
                     {{ inorder_form.id }}
+                    {{ inorder_form.id.errors }}
                 </div>
                 <div class="form-group">
                     {{ inorder_form.code.label_tag }}
                     {{ inorder_form.code }}
+                    {{ inorder_form.code.errors }}
                 </div>
                 <div class="form-group">
                     {{ inorder_form.customer.label_tag }}
                     {{ inorder_form.customer }}
+                    {{ inorder_form.customer.errors }}
                 </div>
                 <div class="form-group">
                     {{ inorder_form.user.label_tag }}
                     {{ inorder_form.user }}
+                    {{ inorder_form.user.errors }}
                 </div>
                 <div class="form-group">
                     {{ inorder_form.create_time.label_tag }}
                     {{ inorder_form.create_time }}
+                    {{ inorder_form.create_time.errors }}
                 </div>
 
                 <button type="reset" class="btn btn-default pull-left">重置</button>

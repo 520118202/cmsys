@@ -15,10 +15,12 @@
                 <div class="form-group">
                     {{ editmore_form.clothes.label_tag }}
                     {{ editmore_form.clothes }}
+                    {{ editmore_form.clothes.errors }}
                 </div>
                 <div class="form-group">
                     {{ editmore_form.amount.label_tag }}
                     {{ editmore_form.amount }}
+                    {{ editmore_form.amount.errors }}
                 </div>
 
                 <button type="reset" class="btn btn-default pull-left">重置</button>

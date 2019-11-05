@@ -14,11 +14,13 @@
                 </div>
                 <div class="form-group">
                     <label for="name">服装名</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="输入服装名查询" style="width: 110px">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="输入服装名查询"
+                           style="width: 110px">
                 </div>
                 <div class="form-group">
                     <label for="sn">服装编号</label>
-                    <input type="text" class="form-control" id="sn" name="sn" placeholder="输入服装编号查询" style="width: 110px">
+                    <input type="text" class="form-control" id="sn" name="sn" placeholder="输入服装编号查询"
+                           style="width: 110px">
                 </div>
                 <div class="form-group">
                     <label for="price">价格</label>
@@ -38,7 +40,8 @@
                 </div>
                 <div class="form-group">
                     <label for="color">颜色</label>
-                    <input type="text" class="form-control" id="color" name="color" placeholder="输入颜色查询" style="width: 110px">
+                    <input type="text" class="form-control" id="color" name="color" placeholder="输入颜色查询"
+                           style="width: 110px">
                 </div>
                 <button type="submit" class="btn btn-success">查询</button>
             </form>
@@ -56,7 +59,6 @@
                     <td>颜色</td>
                     <td>库存</td>
                     <td>描述</td>
-                    <td>图片</td>
                     <td>创建时间</td>
                     <td>修改时间</td>
                     <td>编辑</td>
@@ -70,9 +72,12 @@
                         <td>{{ foo.price }}</td>
                         <td>{{ foo.size }}</td>
                         <td>{{ foo.color }}</td>
-                        <td>{{ foo.stock }}</td>
+                        {% if foo.stock > 10 %}
+                            <td style="color: green">{{ foo.stock }}</td>
+                        {% else %}
+                            <td class="danger" style="color: red">{{ foo.stock }}</td>
+                        {% endif %}
                         <td>{{ foo.desc }}</td>
-                        <td>{{ foo.image }}</td>
                         <td>{{ foo.create_time }}</td>
                         <td>{{ foo.modify_time }}</td>
                         <td><a class="btn btn-primary btn-sm" href="{% url 'clothes:update' foo.id %}">编辑</a></td>

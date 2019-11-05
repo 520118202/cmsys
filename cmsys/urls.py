@@ -31,5 +31,6 @@ urlpatterns = [
     path('customer/', include('customer.urls')),
     path('clothes/', include('clothes.urls')),
     path('inorder/', include('inorder.urls')),
-    path('outorder/', include('outorder.urls'))
+    path('outorder/', include('outorder.urls')),
+    path('checkusername/<str:username>/',views.checkusername, name='checkusername')
 ]

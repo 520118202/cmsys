@@ -15,10 +15,12 @@
                 <div class="form-group">
                     {{ inorderclothes_form.clothes.label_tag }}
                     {{ inorderclothes_form.clothes }}
+                    {{ inorderclothes_form.clothes.errors }}
                 </div>
                 <div class="form-group">
                     {{ inorderclothes_form.amount.label_tag }}
                     {{ inorderclothes_form.amount }}
+                    {{ inorderclothes_form.amount.errors }}
                 </div>
 
                 <button type="reset" class="btn btn-default pull-left">重置</button>

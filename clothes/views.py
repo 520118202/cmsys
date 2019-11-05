@@ -15,6 +15,12 @@ from common.models import Clothes, InorderClothes, Inorder
 def list(request):
     # 返回一个 QuerySet 对象 ，包含所有的表记录
     qs = Clothes.objects.all()
+    short = []
+    for foo in qs:
+        if foo.stock < 10:
+            short.append(foo.name)
+    short_str = '、'.join(short)
+    messages.add_message(request, messages.WARNING, f'{str(short_str)}库存不足')
     paginator = Paginator(qs, 10)
     page = request.GET.get('page', '1')
     result = paginator.page(page)
@@ -161,6 +167,7 @@ def delete(request, clothes_id):
     messages.add_message(request, messages.SUCCESS, '删除成功')
     return redirect(reverse('clothes:index'))
 
+
 def checkstock(request, clothes_id):
     clothes = Clothes.objects.get(id=clothes_id)
-    return JsonResponse({'stock':clothes.stock})
+    return JsonResponse({'stock': clothes.stock})

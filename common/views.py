@@ -1,6 +1,7 @@
 import hashlib
 
 from django.contrib import messages
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
@@ -124,6 +125,13 @@ def changepwd(request):
             'changepwd_form': changepwd_form,
         }
         return render(request, 'changepwd.html', context)
+
+
+def checkusername(request, username):
+    same_name_user = User.objects.filter(username=username)
+    if not same_name_user:
+        return JsonResponse({'ret': 0, 'msg': '用户名可使用'})
+    return JsonResponse({'ret': 1, 'msg': '用户名已存在'})
 
 
 def hash_code(s, salt='psf'):  # 加点盐

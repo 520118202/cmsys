@@ -157,14 +157,14 @@ def addmore(request, outorder_id):
             amount = outorderclothes_form.cleaned_data['amount']
 
             with transaction.atomic():  # 事务
-                new_outorderclothes = OutorderClothes.objects.create(clothes=clothes,
-                                                                     outorder_id=outorder_id,
-                                                                     amount=amount)
-                # 出库减少库存
-                clothes.stock -= amount
                 # 库存足够才成功
-                if clothes.stock >= 0:
+                if clothes.stock >= amount:
+                    # 出库减少库存
+                    clothes.stock -= amount
                     clothes.save()
+                    new_outorderclothes = OutorderClothes.objects.create(clothes=clothes,
+                                                                         outorder_id=outorder_id,
+                                                                         amount=amount)
                     context = {
                         'id': new_outorderclothes.id
                     }
@@ -201,21 +201,24 @@ def editmore(request, outorder_id, outorderclothes_id):
     if request.method == "POST":
         editmore_form = EditmoreForm(request.POST)
         if editmore_form.is_valid():
-            clothes = editmore_form.cleaned_data['clothes']
+            # clothes = editmore_form.cleaned_data['clothes']
             amount = editmore_form.cleaned_data['amount']
 
-            if amount:
+            del_amount = amount - outorderclothes.amount
+            if del_amount <= outorderclothes.clothes.stock:
                 with transaction.atomic():
-                    del_amount = amount - outorderclothes.amount
                     outorderclothes.amount = amount
                     outorderclothes.clothes.stock -= del_amount
                     outorderclothes.save()
                     outorderclothes.clothes.save()
-            context = {
-                'outorderclothes_id': outorderclothes_id
-            }
-            messages.add_message(request, messages.SUCCESS, '修改成功')
-            return redirect(reverse('outorder:detail', args={outorder_id}))
+                context = {
+                    'outorderclothes_id': outorderclothes_id
+                }
+                messages.add_message(request, messages.SUCCESS, '修改成功')
+                return redirect(reverse('outorder:detail', args={outorder_id}))
+            else:
+                messages.add_message(request, messages.WARNING, '修改失败，库存不足')
+                return redirect(reverse('outorder:detail', args={outorder_id}))
         else:
             context = {
                 'editmore_form': editmore_form,
