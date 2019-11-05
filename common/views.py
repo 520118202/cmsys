@@ -3,7 +3,6 @@ import hashlib
 from django.contrib import messages
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-
 # Create your views here.
 from django.urls import reverse
 

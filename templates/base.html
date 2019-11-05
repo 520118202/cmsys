@@ -75,6 +75,18 @@
     {% endif %}
     {% block content %}{% endblock %}
 {% else %}
+    {% if messages %}
+        <div id="messages" class="text-center" style="display: none">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade in" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <strong>信息提示：</strong> {{ message }}.
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
     <div class="container text-center" style="height: 600px">
         <h1>你尚未登录，只能访问公开内容！</h1>
     </div>

@@ -42,7 +42,7 @@ $(function () {
             success: function (result) {
                 if (result.ret == 1) {
                     $("#checkUsername").text(result.msg).css("color", "red")
-                }else {
+                } else {
                     $("#checkUsername").text(result.msg).css("color", 'green')
                 }
             }
