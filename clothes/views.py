@@ -1,15 +1,12 @@
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.db import transaction
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-
 # Create your views here.
 from django.urls import reverse
 
 from clothes.forms import ClothesForm
-from common.models import Clothes, InorderClothes, Inorder
+from common.models import Clothes
 
 
 def list(request):
