@@ -12,14 +12,14 @@ def username_validate(value):
 
 
 def password_validate(value):
-    password_re = re.compile(r'^(a-zA-Z0-9){6,16}$')
+    password_re = re.compile(r'^[a-zA-Z0-9]{6,16}$')
     if not password_re.match(value):
         raise ValidationError('密码格式错误，只能输入6-20个字母、数字')
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(label='用户名', max_length=200, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    password = forms.CharField(label='密码', max_length=200, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+    username = forms.CharField(label='用户名', max_length=32, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(label='密码', max_length=32, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
     captcha = CaptchaField(label='验证码')
 
 

@@ -10,7 +10,7 @@ class User(models.Model):
     # 用户名
     username = models.CharField(max_length=32, unique=True, verbose_name='用户名')
     # 密码
-    password = models.CharField(max_length=32, verbose_name='密码')
+    password = models.CharField(max_length=100, verbose_name='密码')
     # 姓名
     name = models.CharField(max_length=32, verbose_name='姓名')
     # 角色
@@ -59,7 +59,7 @@ class Clothes(models.Model):
         ('XXL', 'XXL')
     )
     # 服装名称
-    name = models.CharField(max_length=32, unique=True, verbose_name='服装名')
+    name = models.CharField(max_length=32, verbose_name='服装名')
     # 服装号
     sn = models.CharField(max_length=32, unique=True, verbose_name='服装号')
     # 价格

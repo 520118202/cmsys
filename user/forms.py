@@ -25,7 +25,7 @@ class UserForm(forms.Form):
                             widget=forms.TextInput({'class': 'form-control', 'disabled': 'disabled'}))
     username = forms.CharField(label="用户名", validators=[username_validate, ], max_length=32,
                                widget=forms.TextInput(attrs={'class': 'form-control'}))
-    password = forms.CharField(label="密码", validators=[password_validate, ], max_length=32,
+    password = forms.CharField(label="密码", max_length=100,
                                widget=forms.TextInput(attrs={'class': 'form-control'}))
     name = forms.CharField(label="姓名", max_length=32, widget=forms.TextInput(attrs={'class': 'form-control'}))
     role = forms.ChoiceField(label="角色", choices=role_choices, widget=forms.Select(attrs={'class': 'form-control'}))
